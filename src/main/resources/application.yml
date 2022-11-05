@@ -1,0 +1,14 @@
+spring:
+    datasource:
+        url: jdbc:postgresql://localhost:5432/virtual_life
+        username: muhammad1
+        password: password
+    jpa:
+        database-platform: org.hibernate.dialect.PostgreSQLDialect
+        hibernate:
+            ddl-auto: create
+        properties:
+            hibernate:
+                format-sql: true
+        show-sql: true
+        open-in-view: false
