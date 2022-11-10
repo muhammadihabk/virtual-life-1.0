@@ -23,24 +23,24 @@ public class User {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
-    @Column(nullable = false)
+    @Column
     private String firstName;
 
-    @Column(nullable = false)
+    @Column
     private String lastName;
 
-    @Column(nullable = false)
+    @Column
     private String email;
 
-    @Column(nullable = false)
-    private String password;
+    @Column
+    private String userPassword;
     
     @Column
     @Temporal(TemporalType.DATE)
     private Date dob;
     
-    @Column
-    @CreatedDate
+    @Column(insertable = false)
+    // @CreatedDate
     @Temporal(TemporalType.DATE)
     private Date dateJoined;
 
@@ -48,11 +48,11 @@ public class User {
         super();
     }
 
-    public User(String firstName, String lastName, String email, String password, Date dob) {
+    public User(String firstName, String lastName, String email, String userPassword, Date dob) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
-        this.password = password;
+        this.userPassword = userPassword;
         this.dob = dob;
     }
 
@@ -85,11 +85,11 @@ public class User {
     }
 
     public String getPassword() {
-        return password;
+        return userPassword;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setPassword(String userPassword) {
+        this.userPassword = userPassword;
     }
 
     public Date getDob() {
