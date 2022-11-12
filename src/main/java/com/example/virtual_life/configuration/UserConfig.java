@@ -1,4 +1,4 @@
-package com.example.virtual_life;
+package com.example.virtual_life.configuration;
 
 import java.util.Date;
 import java.util.List;

@@ -19,12 +19,12 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public void addUser(User user) {
-        Optional<User> userByEmail = userRepository.findByEmail(user.getEmail());
-        if(userByEmail.isPresent()) {
-            throw new IllegalStateException("email is taken");
-        }
-        userRepository.save(user);
+    public User addUser(User user) {
+        // Optional<User> userByEmail = userRepository.findByEmail(user.getEmail());
+        // if(userByEmail.isPresent()) {
+        //     throw new IllegalStateException("email is taken");
+        // }
+        return userRepository.save(user);
     }
     
     public List<User> findAll() {
@@ -47,36 +47,36 @@ public class UserService {
             );
         
         if(firstName != null
-        && firstName.length() > 0
-        && !firstName.equals(user.getFirstName())) {
+            && firstName.length() > 0
+            && !firstName.equals(user.getFirstName())) {
             user.setFirstName(firstName);
         }
         if(lastName != null
-        && lastName.length() > 0
-        && !lastName.equals(user.getLastName())) {
+            && lastName.length() > 0
+            && !lastName.equals(user.getLastName())) {
             user.setLastName(lastName);
         }
         if(email != null
-        && email.length() > 0
-        && !email.equals(user.getEmail())) {
-            Optional<User> userOptional = userRepository.findByEmail(email);
-            if(userOptional.isPresent()) {
-                throw new IllegalStateException("Email is taken");
-            }
+            && email.length() > 0
+            && !email.equals(user.getEmail())) {
+            // Optional<User> userOptional = userRepository.findByEmail(email);
+            // if(userOptional.isPresent()) {
+            //     throw new IllegalStateException("Email is taken");
+            // }
             user.setEmail(email);
         }
         if(password != null
-        && password.length() > 0
-        && !password.equals(user.getPassword())) {
-            user.setPassword(password);
-        }
+            && password.length() > 0
+            && !password.equals(user.getPassword())) {
+                user.setPassword(password);
+            }
     }
     
     public void deleteUser(Long id) {
-        boolean exists = userRepository.existsById(id);
-        if(!exists) {
-            throw new IllegalStateException("User with id " + id + " doesn't exist");
-        }
+        // boolean exists = userRepository.existsById(id);
+        // if(!exists) {
+        //     throw new IllegalStateException("User with id " + id + " doesn't exist");
+        // }
         userRepository.deleteById(id);
     }
 }

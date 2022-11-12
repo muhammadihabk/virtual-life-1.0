@@ -23,25 +23,25 @@ public class User {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
-    @Column
+    @Column(name = "first_name")
     private String firstName;
 
-    @Column
+    @Column(name = "last_name")
     private String lastName;
 
     @Column
     private String email;
 
-    @Column
+    @Column(name = "user_password")
     private String userPassword;
     
     @Column
-    @Temporal(TemporalType.DATE)
+    // @Temporal(TemporalType.DATE)
     private Date dob;
     
-    @Column(insertable = false)
+    @Column(name = "date_joined", insertable = false)
     // @CreatedDate
-    @Temporal(TemporalType.DATE)
+    // @Temporal(TemporalType.DATE)
     private Date dateJoined;
 
     public User() {
