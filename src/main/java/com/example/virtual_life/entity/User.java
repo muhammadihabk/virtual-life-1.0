@@ -36,12 +36,10 @@ public class User {
     private String userPassword;
     
     @Column
-    // @Temporal(TemporalType.DATE)
     private Date dob;
     
     @Column(name = "date_joined", insertable = false)
-    // @CreatedDate
-    // @Temporal(TemporalType.DATE)
+    @CreatedDate
     private Date dateJoined;
 
     public User() {
@@ -106,5 +104,11 @@ public class User {
 
     public void setDateJoined(Date dateJoined) {
         this.dateJoined = dateJoined;
+    }
+
+    @Override
+    public String toString() {
+        return getId() + " " + getFirstName() + " " + getLastName() + " " + getEmail()
+            + " " + getPassword() + " " + getDob() + " " + getDateJoined();
     }
 }

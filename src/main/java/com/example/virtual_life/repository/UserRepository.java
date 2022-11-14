@@ -7,6 +7,7 @@ import javax.persistence.criteria.CriteriaQuery;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -22,22 +23,24 @@ public class UserRepository {
         session.beginTransaction();
         session.save(user);
         session.getTransaction().commit();
+        session.close();
         return user;
     }
     
     public List<User> findAll() {
-        Session session = sessionFactory.getCurrentSession();
-        CriteriaQuery<User> query = session.getCriteriaBuilder().createQuery(User.class);
-        query.from(User.class);
-        List<User> users = session.createQuery(query).getResultList();
+        Session session = sessionFactory.openSession();
+        String queryScript = "FROM User";
+        Query query = session.createQuery(queryScript);
+        List users = query.list();
         session.close();
         return users;
     }
     
     public Optional<User> findById(Long id) {
+        Session session = sessionFactory.openSession();
         return null;
     }
-
+    
     public void deleteById(Long id) {
 
     }
