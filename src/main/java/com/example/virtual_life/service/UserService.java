@@ -20,10 +20,10 @@ public class UserService {
     }
 
     public User addUser(User user) {
-        // Optional<User> userByEmail = userRepository.findByEmail(user.getEmail());
-        // if(userByEmail.isPresent()) {
-        //     throw new IllegalStateException("email is taken");
-        // }
+        Optional<User> userByEmail = userRepository.findByEmail(user.getEmail());
+        if(userByEmail.isPresent()) {
+            throw new IllegalStateException("email is taken");
+        }
         return userRepository.save(user);
     }
     

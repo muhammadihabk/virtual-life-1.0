@@ -3,7 +3,9 @@ package com.example.virtual_life.repository;
 import java.util.List;
 import java.util.Optional;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -55,6 +57,13 @@ public class UserRepository {
     }
 
     public Optional<User> findByEmail(String email) {
-        return null;
+        Session session = sessionFactory.openSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<User> criteria = builder.createQuery(User.class);
+        Root<User> root = criteria.from(User.class);
+        criteria.where(builder.equal(root.get("email"), email));
+        Optional<User> user = session.createQuery(criteria).uniqueResultOptional();
+        session.close();
+        return user;
     }
 }
