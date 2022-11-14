@@ -44,7 +44,14 @@ public class UserRepository {
     }
     
     public void deleteById(Long id) {
-
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+        final String sqlScript = "DELETE"
+                                + " FROM virtual_life_user"
+                                + " WHERE id = :id";
+        session.createNativeQuery(sqlScript).setParameter("id", id).executeUpdate();
+        session.getTransaction().commit();
+        session.close();
     }
 
     public Optional<User> findByEmail(String email) {
