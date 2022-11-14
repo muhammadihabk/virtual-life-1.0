@@ -38,7 +38,9 @@ public class UserRepository {
     
     public Optional<User> findById(Long id) {
         Session session = sessionFactory.openSession();
-        return null;
+        Optional<User> optionalUser = Optional.ofNullable(session.get(User.class, id));
+        session.close();
+        return optionalUser;
     }
     
     public void deleteById(Long id) {
