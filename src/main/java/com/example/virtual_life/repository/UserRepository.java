@@ -31,9 +31,11 @@ public class UserRepository {
     
     public List<User> findAll() {
         Session session = sessionFactory.openSession();
-        String queryScript = "FROM User";
-        Query query = session.createQuery(queryScript);
-        List users = query.list();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<User> criteria = builder.createQuery(User.class);
+        Root<User> root = criteria.from(User.class);
+        criteria.select(root);
+        List<User> users = session.createQuery(criteria).getResultList();
         session.close();
         return users;
     }
