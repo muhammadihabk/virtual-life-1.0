@@ -42,7 +42,11 @@ public class UserRepository {
     
     public Optional<User> findById(Long id) {
         Session session = sessionFactory.openSession();
-        Optional<User> optionalUser = Optional.ofNullable(session.get(User.class, id));
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<User> criteria = builder.createQuery(User.class);
+        Root<User> root = criteria.from(User.class);
+        criteria.where(builder.equal(root.get("id"), id));
+        Optional<User> optionalUser = session.createQuery(criteria).uniqueResultOptional();
         session.close();
         return optionalUser;
     }
