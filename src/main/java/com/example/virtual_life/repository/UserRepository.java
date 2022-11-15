@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaDelete;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
@@ -54,10 +55,11 @@ public class UserRepository {
     public void deleteById(Long id) {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
-        final String sqlScript = "DELETE"
-                                + " FROM virtual_life_user"
-                                + " WHERE id = :id";
-        session.createNativeQuery(sqlScript).setParameter("id", id).executeUpdate();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaDelete<User> criteria = builder.createCriteriaDelete(User.class);
+        Root<User> root = criteria.from(User.class);
+        criteria.where(builder.equal(root.get("id"), id));
+        session.createQuery(criteria).executeUpdate();
         session.getTransaction().commit();
         session.close();
     }
