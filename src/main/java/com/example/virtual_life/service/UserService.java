@@ -59,10 +59,10 @@ public class UserService {
         if(email != null
             && email.length() > 0
             && !email.equals(user.getEmail())) {
-            // Optional<User> userOptional = userRepository.findByEmail(email);
-            // if(userOptional.isPresent()) {
-            //     throw new IllegalStateException("Email is taken");
-            // }
+            Optional<User> userOptional = userRepository.findByEmail(email);
+            if(userOptional.isPresent()) {
+                throw new IllegalStateException("Email is taken");
+            }
             user.setEmail(email);
         }
         if(password != null
