@@ -36,8 +36,7 @@ public class HibernateConfiguration {
         Properties properties = new Properties();
         properties.setProperty("hibernate.dialect", dialect);
         properties.setProperty("hibernate.show-sql", "true");
-        // TODO
-        // properties.setProperty("spring.jpa.hibernate.format-sql", "true");
+        properties.setProperty("spring.jpa.hibernate.format-sql", "true");
         properties.setProperty("hibernate.hbm2ddl.auto", "none");
         sessionFactory.setHibernateProperties(properties);
         return sessionFactory;

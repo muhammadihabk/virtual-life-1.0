@@ -1,0 +1,17 @@
+Script started on 2022-11-18 22:57:33+02:00 [TERM="xterm-256color" TTY="/dev/pts/3" COLUMNS="122" LINES="28"]
+[[1;34mINFO[m] Scanning for projects...
+[[1;34mINFO[m] [1m------------------------------------------------------------------------------------------------------------------[m
+[[1;34mINFO[m] [1;31mBUILD FAILURE[m
+[[1;34mINFO[m] [1m------------------------------------------------------------------------------------------------------------------[m
+[[1;34mINFO[m] Total time:  4.485 s
+[[1;34mINFO[m] Finished at: 2022-11-18T22:57:48+02:00
+[[1;34mINFO[m] [1m------------------------------------------------------------------------------------------------------------------[m
+[[1;31mERROR[m] No goals have been specified for this build. You must specify a valid lifecycle phase or a goal in the format <plugin-prefix>:<goal> or <plugin-group-id>:<plugin-artifact-id>[:<plugin-version>]:<goal>. Available lifecycle phases are: pre-clean, clean, post-clean, validate, initialize, generate-sources, process-sources, generate-resources, process-resources, compile, process-classes, generate-test-sources, process-test-sources, generate-test-resources, process-test-resources, test-compile, process-test-classes, test, prepare-package, package, pre-integration-test, integration-test, post-integration-test, verify, install, deploy, pre-site, site, post-site, site-deploy, wrapper. -> [1m[Help 1][m
+[[1;31mERROR[m] 
+[[1;31mERROR[m] To see the full stack trace of the errors, re-run Maven with the '[1m-e[m' switch
+[[1;31mERROR[m] Re-run Maven using the '[1m-X[m' switch to enable verbose output
+[[1;31mERROR[m] 
+[[1;31mERROR[m] For more information about the errors and possible solutions, please read the following articles:
+[[1;31mERROR[m] [1m[Help 1][m http://cwiki.apache.org/confluence/display/MAVEN/NoGoalSpecifiedException
+[0m[0m
+Script done on 2022-11-18 22:57:48+02:00 [COMMAND_EXIT_CODE="1"]

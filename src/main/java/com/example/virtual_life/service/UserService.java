@@ -67,8 +67,8 @@ public class UserService {
         }
         if(password != null
             && password.length() > 0
-            && !password.equals(user.getPassword())) {
-                user.setPassword(password);
+            && !password.equals(user.getUserPassword())) {
+                user.setUserPassword(password);
             }
     }
     

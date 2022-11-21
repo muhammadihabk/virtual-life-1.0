@@ -1,20 +1,28 @@
 package com.example.virtual_life.entity;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import java.util.Objects;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 @Entity
 @Table(name = "virtual_life_user")
 @EntityListeners(AuditingEntityListener.class)
@@ -42,73 +50,31 @@ public class User {
     @CreatedDate
     private Date dateJoined;
 
-    public User() {
-        super();
-    }
+    @OneToMany(
+        mappedBy = "user",
+        cascade = CascadeType.ALL,
+        orphanRemoval = true
+    )
+    private List<Friendship> friends = new ArrayList<>();
 
-    public User(String firstName, String lastName, String email, String userPassword, Date dob) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.userPassword = userPassword;
-        this.dob = dob;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User other = (User) o;
+        return Objects.equals(id, other.id);
     }
-
-    public Long getId() {
-        return id;
-    }
-    
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPassword() {
-        return userPassword;
-    }
-
-    public void setPassword(String userPassword) {
-        this.userPassword = userPassword;
-    }
-
-    public Date getDob() {
-        return dob;
-    }
-
-    public void setDob(Date dob) {
-        this.dob = dob;
-    }
-
-    public Date getDateJoined() {
-        return dateJoined;
-    }
-
-    public void setDateJoined(Date dateJoined) {
-        this.dateJoined = dateJoined;
+ 
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 
     @Override
     public String toString() {
-        return getId() + " " + getFirstName() + " " + getLastName() + " " + getEmail()
-            + " " + getPassword() + " " + getDob() + " " + getDateJoined();
+        return "firstName: " + firstName
+                + " lastName: " + lastName
+                + " email: " + email
+                + " dob: " + dob;
     }
 }
