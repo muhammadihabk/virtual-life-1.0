@@ -12,6 +12,7 @@ import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -56,6 +57,9 @@ public class User {
         orphanRemoval = true
     )
     private List<Friendship> friends = new ArrayList<>();
+
+    @ManyToMany
+    private List<Hobby> hobbies = new ArrayList<>();
 
     @Override
     public boolean equals(Object o) {
