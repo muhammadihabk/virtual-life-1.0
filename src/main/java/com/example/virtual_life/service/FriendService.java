@@ -24,5 +24,9 @@ public class FriendService {
     public int addNewFriend(Long userId, Long friendId) {
         return friendRepository.addNewFriend(userId, friendId);
     }
+    
+    public int deleteFriend(Long userId, Long friendId) {
+        return friendRepository.deleteFriend(userId, friendId);
+    }
 
 }

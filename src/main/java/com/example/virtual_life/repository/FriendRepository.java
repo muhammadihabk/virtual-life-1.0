@@ -55,4 +55,21 @@ public class FriendRepository {
         session.close();
         return affectedRows;
     }
+
+    public int deleteFriend(Long userId, Long friendId) {
+        String queryString = """
+                DELETE FROM Friendship
+                WHERE (user_id = :userId OR user_id = :friendId )
+                    AND (friend_id = :friendId OR friend_id = :userId ) ;
+                """;
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+        int affectedRows = session.createNativeQuery(queryString)
+                                    .setParameter("userId", userId)
+                                    .setParameter("friendId", friendId)
+                                    .executeUpdate();
+        session.getTransaction().commit();
+        session.close();
+        return affectedRows;
+    }
 }

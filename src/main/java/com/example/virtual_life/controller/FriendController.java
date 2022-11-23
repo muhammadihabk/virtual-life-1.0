@@ -3,6 +3,7 @@ package com.example.virtual_life.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -29,5 +30,11 @@ public class FriendController {
     public int addNewFriend(@PathVariable Long userId,
                             @PathVariable Long friendId) {
         return friendService.addNewFriend(userId, friendId);
+    }
+    
+    @DeleteMapping("/{userId}/friend/{friendId}")
+    public int deleteFriend(@PathVariable Long userId,
+                            @PathVariable Long friendId) {
+        return friendService.deleteFriend(userId, friendId);
     }
 }
