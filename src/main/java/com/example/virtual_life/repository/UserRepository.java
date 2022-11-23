@@ -23,24 +23,44 @@ public class UserRepository {
     public User save(User user) {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
-        session.save(user);
+        session.persist(user);
         session.getTransaction().commit();
         session.close();
         return user;
     }
     
-    public List<User> findAll() {
+    public List<Object[]> findAll() {
         Session session = sessionFactory.openSession();
         CriteriaBuilder builder = session.getCriteriaBuilder();
-        CriteriaQuery<User> criteria = builder.createQuery(User.class);
+        CriteriaQuery<Object[]> criteria = builder.createQuery(Object[].class);
         Root<User> root = criteria.from(User.class);
-        criteria.select(root);
-        List<User> users = session.createQuery(criteria).getResultList();
+        criteria.select(builder.array(
+                            root.get("firstName"),
+                            root.get("lastName"),
+                            root.get("email"),
+                            root.get("dob")));
+        List<Object[]> users = session.createQuery(criteria).getResultList();
         session.close();
         return users;
     }
+
+    public List<Object[]> findById(Long id) {
+        Session session = sessionFactory.openSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Object[]> criteria = builder.createQuery(Object[].class);
+        Root<User> root = criteria.from(User.class);
+        criteria.select(builder.array(
+                            root.get("firstName"),
+                            root.get("lastName"),
+                            root.get("email"),
+                            root.get("dob")));
+        criteria.where(builder.equal(root.get("id"), id));
+        List<Object[]> user = session.createQuery(criteria).getResultList();
+        session.close();
+        return user;
+    }
     
-    public Optional<User> findById(Long id) {
+    public Optional<User> findByIdAllData(Long id) {
         Session session = sessionFactory.openSession();
         CriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<User> criteria = builder.createQuery(User.class);

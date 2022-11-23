@@ -27,12 +27,12 @@ public class UserService {
         return userRepository.save(user);
     }
     
-    public List<User> findAll() {
+    public List<Object[]> findAll() {
         return userRepository.findAll();
     }
-
-    public User findById(Long id) {
-        return userRepository.findById(id).orElse(null);
+    
+    public List<Object[]> findById(Long id) {
+        return userRepository.findById(id);
     }
 
     @Transactional
@@ -41,7 +41,7 @@ public class UserService {
                             String lastName,
                             String email,
                             String password) {
-        User user = userRepository.findById(id)
+        User user = userRepository.findByIdAllData(id)
             .orElseThrow(() ->
                 new IllegalStateException("User with id " + id + " doesn't exist")
             );

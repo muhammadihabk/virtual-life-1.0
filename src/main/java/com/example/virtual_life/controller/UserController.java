@@ -31,12 +31,12 @@ public class UserController {
     }
 
     @GetMapping
-    public List<User> findAll() {
+    public List<Object[]> findAll() {
         return userService.findAll();
     }
     
     @GetMapping("/{id}")
-    public User findById(@PathVariable Long id) {
+    public List<Object[]> findById(@PathVariable Long id) {
         return userService.findById(id);
     }
 

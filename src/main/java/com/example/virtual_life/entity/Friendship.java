@@ -47,4 +47,11 @@ public class Friendship {
     public int hashCode() {
         return Objects.hash(user, friend);
     }
+
+    @Override
+    public String toString() {
+        return "Id: " + "\n\tuserId: " + id.getUserId()
+                + "\n\tfriendId: " + id.getFriendId()
+                + "\nUser: " + user + "\nFriend: " + friend + "\ndateFriendship: " + dateFriendship;
+    }
 }

@@ -1,5 +1,7 @@
 package com.example.virtual_life.configuration;
 
+import com.example.virtual_life.entity.*;
+
 import java.util.Properties;
 
 import javax.sql.DataSource;
@@ -32,7 +34,10 @@ public class HibernateConfiguration {
     public LocalSessionFactoryBean sessionFactory() {
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
         sessionFactory.setDataSource(dataSource());
-        sessionFactory.setPackagesToScan("com");
+        sessionFactory.setPackagesToScan("com.example.virtual_life.entity");
+        // sessionFactory.setAnnotatedClasses(User.class,
+                                            // Friendship.class,
+                                            // FriendshipId.class);
         Properties properties = new Properties();
         properties.setProperty("hibernate.dialect", dialect);
         properties.setProperty("hibernate.show-sql", "true");

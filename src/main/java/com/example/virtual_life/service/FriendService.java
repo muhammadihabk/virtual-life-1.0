@@ -21,4 +21,8 @@ public class FriendService {
         return friendRepository.findAllFriendsOfUser(userId);
     }
 
+    public int addNewFriend(Long userId, Long friendId) {
+        return friendRepository.addNewFriend(userId, friendId);
+    }
+
 }
