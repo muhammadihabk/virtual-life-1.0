@@ -19,17 +19,13 @@ public class FriendRepository {
                             FROM virtual_life_user u
                             INNER JOIN (
                                 SELECT f.user_id, f.friend_id
-                                FROM virtual_life_user u
-                                INNER JOIN friendship f
-                                    ON u.id = f.friend_id
+                                FROM friendship f
                                 UNION ALL
                                 SELECT f.friend_id, f.user_id
-                                FROM virtual_life_user u
-                                INNER JOIN friendship f
-                                    ON u.id = f.friend_id
-                                ) all_friends_of_user
-                                ON u.id = all_friends_of_user.friend_id
-                            WHERE all_friends_of_user.user_id = :userId ;
+                                FROM friendship f
+                                ) friendship
+                                ON u.id = friendship.friend_id
+                            WHERE friendship.user_id = :userId ;
                         """;
         Session session = sessionFactory.openSession();
         List<Object[]> rows = session.createNativeQuery(queryString)
