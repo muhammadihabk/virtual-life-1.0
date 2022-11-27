@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.virtual_life.service.RecommendFriendService;
 
 @RestController
-@RequestMapping("/app/recommendfriend")
+@RequestMapping("/app/recommend-friend")
 public class RecommendFriendController {
     private RecommendFriendService recommendFriendService;
     
@@ -21,7 +21,7 @@ public class RecommendFriendController {
         this.recommendFriendService = recommendFriendService;
     }
     
-    @GetMapping("/2ndlevelfriend/{userId}")
+    @GetMapping("/2nd-level-friend/{userId}")
     public List<Object[]> secondLvlFriendsOfUser(@PathVariable Long userId) {
         return recommendFriendService.secondLvlFriendsOfUser(userId);
     }
