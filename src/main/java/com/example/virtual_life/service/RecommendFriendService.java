@@ -20,4 +20,8 @@ public class RecommendFriendService {
     public List<Object[]> secondLvlFriendsOfUser(Long userId) {
         return recommendFriendRepository.secondLvlFriendsOfUser(userId);
     }
+
+    public List<Object[]> nonfriendsWithCommonHobbies(Long userId) {
+        return recommendFriendRepository.nonfriendsWithCommonHobbies(userId);
+    }
 }

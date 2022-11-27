@@ -25,4 +25,9 @@ public class RecommendFriendController {
     public List<Object[]> secondLvlFriendsOfUser(@PathVariable Long userId) {
         return recommendFriendService.secondLvlFriendsOfUser(userId);
     }
+
+    @GetMapping("/nonfriends-with-common-hobbies/{userId}")
+    public List<Object[]> nonfriendsWithCommonHobbies(@PathVariable Long userId) {
+        return recommendFriendService.nonfriendsWithCommonHobbies(userId);
+    }
 }

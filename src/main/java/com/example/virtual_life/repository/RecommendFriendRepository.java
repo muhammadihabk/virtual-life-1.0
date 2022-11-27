@@ -49,4 +49,40 @@ public class RecommendFriendRepository {
         session.close();
         return names;
     }
+
+    public List<Object[]> nonfriendsWithCommonHobbies(Long userId) {
+        String sqlScript = """
+            SELECT u.first_name, u.last_name, h.hobby_name
+            FROM virtual_life_user u
+            INNER JOIN(
+                SELECT *
+                FROM user_hobby
+                WHERE user_id NOT IN(
+                    SELECT friendship.friend_id
+                    FROM(
+                        SELECT f.user_id, f.friend_id
+                        FROM friendship f
+                        UNION ALL
+                        SELECT f.friend_id, f.user_id
+                        FROM friendship f
+                    ) friendship
+                    WHERE friendship.user_id = :userId 
+                ) AND user_id != :userId 
+                    AND hobby_id IN (
+                        SELECT hobby_id
+                        FROM user_hobby
+                        WHERE user_id = :userId 
+                    )
+            ) nonfriends_with_common_hobbies
+            ON u.id = nonfriends_with_common_hobbies.user_id
+            INNER JOIN hobby h
+            ON h.id = nonfriends_with_common_hobbies.hobby_id;
+                """;
+        Session session = sessionFactory.openSession();
+        List<Object[]> rows = session.createNativeQuery(sqlScript)
+                                    .setParameter("userId", userId)
+                                    .getResultList();
+        session.close();
+        return rows;
+    }
 }
