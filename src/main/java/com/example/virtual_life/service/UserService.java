@@ -5,7 +5,6 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.example.virtual_life.entity.User;
 import com.example.virtual_life.repository.UserRepository;
@@ -35,41 +34,12 @@ public class UserService {
         return userRepository.findById(id);
     }
 
-    @Transactional
     public void updateUser(Long id,
                             String firstName,
                             String lastName,
                             String email,
                             String password) {
-        User user = userRepository.findByIdAllData(id)
-            .orElseThrow(() ->
-                new IllegalStateException("User with id " + id + " doesn't exist")
-            );
-        
-        if(firstName != null
-            && firstName.length() > 0
-            && !firstName.equals(user.getFirstName())) {
-            user.setFirstName(firstName);
-        }
-        if(lastName != null
-            && lastName.length() > 0
-            && !lastName.equals(user.getLastName())) {
-            user.setLastName(lastName);
-        }
-        if(email != null
-            && email.length() > 0
-            && !email.equals(user.getEmail())) {
-            Optional<User> userOptional = userRepository.findByEmail(email);
-            if(userOptional.isPresent()) {
-                throw new IllegalStateException("Email is taken");
-            }
-            user.setEmail(email);
-        }
-        if(password != null
-            && password.length() > 0
-            && !password.equals(user.getUserPassword())) {
-                user.setUserPassword(password);
-            }
+        userRepository.updateUser(id, firstName, lastName, email, password);
     }
     
     public void deleteUser(Long id) {

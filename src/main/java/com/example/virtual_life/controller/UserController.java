@@ -10,11 +10,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.virtual_life.entity.User;
 import com.example.virtual_life.service.UserService;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 
 @RestController
 @RequestMapping("/app/user")
@@ -40,13 +40,28 @@ public class UserController {
         return userService.findById(id);
     }
 
-    @PutMapping("/{id}")
-    public void updateUser(@PathVariable("id") Long id,
-                            @RequestParam(required = false) String firstName,
-                            @RequestParam(required = false) String lastName,
-                            @RequestParam(required = false) String email,
-                            @RequestParam(required = false) String password) {
-        
+    @PutMapping
+    public void updateUser(@RequestBody ObjectNode user) {
+        Long id = null;
+        String firstName = null;
+        String lastName = null;
+        String email = null;
+        String password = null;
+        if(user.get("id") != null) {
+            id = user.get("id").asLong();
+        }
+        if(user.get("firstName") != null) {
+            firstName = user.get("firstName").asText();
+        }
+        if(user.get("lastName") != null) {
+            lastName = user.get("lastName").asText();
+        }
+        if(user.get("email") != null) {
+            email = user.get("email").asText();
+        }
+        if(user.get("password") != null) {
+            password = user.get("password").asText();
+        }
         userService.updateUser(id, firstName, lastName, email, password);
     }
 

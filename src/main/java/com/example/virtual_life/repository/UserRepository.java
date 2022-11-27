@@ -70,6 +70,45 @@ public class UserRepository {
         session.close();
         return optionalUser;
     }
+
+    public void updateUser(Long id,
+                            String firstName,
+                            String lastName,
+                            String email,
+                            String password) {
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+        User user = session.get(User.class, id);
+        if(user == null) {
+            new IllegalStateException("User with id " + id + " doesn't exist");
+        }
+        if(firstName != null
+            && firstName.length() > 0
+            && !firstName.equals(user.getFirstName())) {
+            user.setFirstName(firstName);
+        }
+        if(lastName != null
+            && lastName.length() > 0
+            && !lastName.equals(user.getLastName())) {
+            user.setLastName(lastName);
+        }
+        if(email != null
+            && email.length() > 0
+            && !email.equals(user.getEmail())) {
+            Optional<User> userOptional = findByEmail(email);
+            if(userOptional.isPresent()) {
+                throw new IllegalStateException("Email is taken");
+            }
+            user.setEmail(email);
+        }
+        if(password != null
+            && password.length() > 0
+            && !password.equals(user.getUserPassword())) {
+                user.setUserPassword(password);
+            }
+        session.getTransaction().commit();
+        session.close();
+    }
     
     public void deleteById(Long id) {
         Session session = sessionFactory.openSession();
