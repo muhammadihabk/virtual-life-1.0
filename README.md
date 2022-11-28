@@ -11,30 +11,30 @@
 ## User
 | Method | Action            | Route              | Body                   | Implemented          |
 | ------ | ----------------- | ------------------ | ---------------------- | -------------------- |
-| POST   | add new user      | /app/user          | [example](user-post)   | :white_check_mark:   |
-| GET    | get all users     | /app/user          |                        | :white_check_mark:   |
-| GET    | get user by id    | /app/user/{userId} |                        | :white_check_mark:   |
-| UPDATE | update user by id | /app/user/{userId} | [example](user-update) | :white_check_mark:   |
-| DELETE | delete user by id | /app/user/{userId} |                        | :white_check_mark:   |
+| POST   | add new user      | /app/user          | [example](user-post)   | :heavy_check_mark:   |
+| GET    | get all users     | /app/user          |                        | :heavy_check_mark:   |
+| GET    | get user by id    | /app/user/{userId} |                        | :heavy_check_mark:   |
+| UPDATE | update user by id | /app/user/{userId} | [example](user-update) | :heavy_check_mark:   |
+| DELETE | delete user by id | /app/user/{userId} |                        | :heavy_check_mark:   |
 
 ## Friend
 | Method | Action                  | Route                                | Body                             | Implemented          |
 | ------ | ----------------------- | ------------------------------------ | -------------------------------- | -------------------- |
-| GET    | get all friends of user | /app/user/{userId}/friend            |                                  | :white_check_mark:   |
-| PUT    | add new friend          | /app/user/friend                     | [example](friend-add-new-friend) | :white_check_mark:   |
-| DELETE | delete friend by id     | /app/user/{userId}/friend/{friendId} |                                  | :white_check_mark:   |
+| GET    | get all friends of user | /app/user/{userId}/friend            |                                  | :heavy_check_mark:   |
+| PUT    | add new friend          | /app/user/friend                     | [example](friend-add-new-friend) | :heavy_check_mark:   |
+| DELETE | delete friend by id     | /app/user/{userId}/friend/{friendId} |                                  | :heavy_check_mark:   |
 
 ## Hobby
 | Method | Action                  | Route      | Body | Implemented        |
 | ------ | ----------------------- | ---------- | ---- | ------------------ |
-| GET    | get all hobbies         | /app/hobby |      | :white_check_mark: |
+| GET    | get all hobbies         | /app/hobby |      | :heavy_check_mark: |
 
 ## Recommend a friend
 | Method | Action                                                           | Route                                                         | Body | Implemented        |
 | ------ | ---------------------------------------------------------------- | ------------------------------------------------------------- | ---- | ------------------ |
-| GET    | get friends of friends                                           | /app/recommend-friend/2nd-level-friend/{userId}               |      | :white_check_mark: |
+| GET    | get friends of friends                                           | /app/recommend-friend/2nd-level-friend/{userId}               |      | :heavy_check_mark: |
 | GET    | get 3rd level friends                                            | /app/recommend-friend/3rd-level-friend/{userId}               |      |                    |
-| GET    | users with at least 1 common hobby                               | /app/recommend-friend/nonfriends-with-common-hobbies/{userId} |      | :white_check_mark: |
+| GET    | users with at least 1 common hobby                               | /app/recommend-friend/nonfriends-with-common-hobbies/{userId} |      | :heavy_check_mark: |
 | GET    | users with at least 1 common hobby and are 2nd level friends     | /app/recommend-friend/hobby-2nd-level-friend                  |      |                    |
 | GET    | GET users with at least 1 common hobby and are 3rd level friends | /app/recommend-friend/hobby-3rd-level-friend                  |      |                    |
 
@@ -47,7 +47,7 @@
 | Method | Action                                                        | Route              | Body | Implemented        |
 | ------ | ------------------------------------------------------------- | ------------------ | ---- | ------------------ |
 | GET    | get all posts                                                 |                    |      |                    |
-| GET    | get all posts of user's friends                               | /app/home/{userId} |      | :white_check_mark: |
+| GET    | get all posts of user's friends                               | /app/home/{userId} |      | :heavy_check_mark: |
 | GET    | get all posts of user's friends ranked by number of reactions |                    |      |                    |
 
 # Todo
