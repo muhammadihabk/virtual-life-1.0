@@ -70,6 +70,9 @@
 - Data validation
 - Hibernate improvements
 
+# Use the app
+- To generate data using PostgreSQL, use SQL script in `generate data` directory.
+
 ### <a id="user-post">/app/user</a>
 ```json
 {
