@@ -23,8 +23,8 @@
 ## Friend
 | Method | Action                  | Route                                | Body                             | Implemented          |
 | ------ | ----------------------- | ------------------------------------ | -------------------------------- | -------------------- |
-| GET    | get all friends of user | /app/user/{userId}/friend            |                                  | :heavy_check_mark:   |
 | PUT    | add new friend          | /app/user/friend                     | [example](friend-add-new-friend) | :heavy_check_mark:   |
+| GET    | get all friends of user | /app/user/{userId}/friend            |                                  | :heavy_check_mark:   |
 | DELETE | delete friend by id     | /app/user/{userId}/friend/{friendId} |                                  | :heavy_check_mark:   |
 
 ## Hobby
@@ -49,7 +49,6 @@
 ## Home feed
 | Method | Action                                                        | Route              | Body | Implemented        |
 | ------ | ------------------------------------------------------------- | ------------------ | ---- | ------------------ |
-| GET    | get all posts                                                 |                    |      |                    |
 | GET    | get all posts of user's friends                               | /app/home/{userId} |      | :heavy_check_mark: |
 | GET    | get all posts of user's friends ranked by number of reactions |                    |      |                    |
 
