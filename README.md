@@ -6,6 +6,9 @@
 
 - Spring, Spring Boot, PostgreSQL and Hibernate
 
+# Database schema
+![Database schema](/README-images)
+
 # API endpoints
 
 ## User
