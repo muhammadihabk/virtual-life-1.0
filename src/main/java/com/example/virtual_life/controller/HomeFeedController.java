@@ -21,6 +21,14 @@ public class HomeFeedController {
         this.homeFeedService = homeFeedService;
     }
     
+    // TODO
+    // Home page
+    // Only logged in users
+    @GetMapping
+    public String loadHomePage() {
+        return "<h1>Home page</h1>";
+    }
+    
     @GetMapping("/{userId}")
     public List<Object[]> findAll(@PathVariable Long userId) {
         return homeFeedService.findAll(userId);
