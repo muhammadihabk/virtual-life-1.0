@@ -14,34 +14,44 @@ public class RecommendFriendRepository {
 
     public List<Object[]> secondLvlFriendsOfUser(Long userId) {
         String sqlScript = """
-            SELECT DISTINCT(id), first_name, last_name
-            FROM virtual_life_user u
-            INNER JOIN(
-                SELECT friend_id
-                FROM(
-                    SELECT u.id
-                    FROM virtual_life_user u
-                    INNER JOIN(
-                        SELECT f.user_id, f.friend_id
-                        FROM friendship f
-                        UNION ALL
-                        SELECT f.friend_id, f.user_id
-                        FROM friendship f
-                        ) all_friends
-                        ON u.id = all_friends.friend_id
-                        AND all_friends.user_id = :userId
-                    ) user_friends
-                INNER JOIN (
-                    SELECT f.user_id, f.friend_id
-                    FROM friendship f
+            SELECT u.first_name, u.last_name
+            FROM (
+                SELECT friend_id friend_lvl_1
+                FROM (
+                    SELECT f1.user_id, f1.friend_id
+                    FROM friendship f1
                     UNION ALL
-                    SELECT f.friend_id, f.user_id
-                    FROM friendship f
-                ) friendship
-                    ON user_friends.id = friendship.user_id
-            ) friends_friends
-                ON u.id = friends_friends.friend_id;
-                """;
+                        SELECT f2.friend_id, f2.user_id
+                        FROM friendship f2
+                ) all_friends
+                WHERE all_friends.user_id = :userId
+            ) friends_lvl_1
+            INNER JOIN (
+                SELECT f1.user_id, f1.friend_id
+                FROM friendship f1
+                UNION ALL
+                    SELECT f2.friend_id, f2.user_id
+                    FROM friendship f2
+            ) all_friends
+            ON friends_lvl_1.friend_lvl_1 = all_friends.user_id
+            INNER JOIN virtual_life_user u
+            ON u.id = all_friends.friend_id
+            WHERE all_friends.friend_id != :userId
+                AND all_friends.friend_id
+                    NOT IN (
+                            SELECT all_friends.friend_id
+                            FROM virtual_life_user u
+                            INNER JOIN (
+                                    SELECT f1.user_id, f1.friend_id
+                                    FROM friendship f1
+                                    UNION ALL
+                                        SELECT f2.friend_id, f2.user_id
+                                        FROM friendship f2
+                            ) all_friends
+                            ON all_friends.user_id = :userId
+                        )
+            GROUP BY all_friends.friend_id, u.first_name, u.last_name;
+        """;
         Session session = sessionFactory.openSession();
         List<Object[]> names = session.createNativeQuery(sqlScript)
                                     .setParameter("userId", userId)
